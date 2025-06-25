@@ -1,4 +1,4 @@
-import Header from '../components/layout/Header';
+import Header from '@/components/layout/Header';
 // eslint-disable-next-line import/no-absolute-path
 import Button from '@/components/common/Button';
 

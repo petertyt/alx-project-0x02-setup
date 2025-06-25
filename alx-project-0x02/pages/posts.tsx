@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import Header from '../components/layout/Header';
+// eslint-disable-next-line import/no-absolute-path
+import Header from '@/components/layout/Header';
 import PostCard from '../components/common/PostCard';
 import { PostProps } from '../interfaces';
 

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import Header from '../components/layout/Header';
+// eslint-disable-next-line import/no-absolute-path
+import Header from '@/components/layout/Header';
 // eslint-disable-next-line import/no-absolute-path
 import Card from '@/components/common/Card';
 import PostModal from '../components/common/PostModal';
