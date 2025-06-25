@@ -1,29 +1,22 @@
-import React, { useEffect, useState } from 'react';
-import Header from '../components/layout/Header';
+import React from 'react';
+// eslint-disable-next-line import/no-absolute-path
+import Header from '@/components/layout/Header';
 import UserCard from '../components/common/UserCard';
 import { UserProps } from '../interfaces';
 
-export default function Users() {
-  const [users, setUsers] = useState<UserProps[]>([]);
-  const [loading, setLoading] = useState(true);
+interface UsersPageProps {
+  users: UserProps[];
+}
 
-  useEffect(() => {
-    fetch('https://jsonplaceholder.typicode.com/users')
-      .then(res => res.json())
-      .then(data => {
-        setUsers(data);
-        setLoading(false);
-      });
-  }, []);
-
+export default function Users({ users }: UsersPageProps) {
   return (
     <>
       <Header />
       <main>
         <h1>Users Page</h1>
         <p>This is the Users page.</p>
-        {loading ? (
-          <p>Loading users...</p>
+        {users.length === 0 ? (
+          <p>No users found.</p>
         ) : (
           users.map(user => (
             <UserCard
@@ -38,4 +31,14 @@ export default function Users() {
       </main>
     </>
   );
+}
+
+export async function getStaticProps() {
+  const res = await fetch('https://jsonplaceholder.typicode.com/users');
+  const data = await res.json();
+  return {
+    props: {
+      users: data,
+    },
+  };
 }
