@@ -1,36 +1,22 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 // eslint-disable-next-line import/no-absolute-path
 import Header from '@/components/layout/Header';
 import PostCard from '../components/common/PostCard';
 import { PostProps } from '../interfaces';
 
-export default function Posts() {
-  const [posts, setPosts] = useState<PostProps[]>([]);
-  const [loading, setLoading] = useState(true);
+interface PostsPageProps {
+  posts: PostProps[];
+}
 
-  useEffect(() => {
-    fetch('https://jsonplaceholder.typicode.com/posts?_limit=10')
-      .then(res => res.json())
-      .then(data => {
-        setPosts(
-          data.map((post: any) => ({
-            title: post.title,
-            content: post.body,
-            userId: post.userId,
-          }))
-        );
-        setLoading(false);
-      });
-  }, []);
-
+export default function Posts({ posts }: PostsPageProps) {
   return (
     <>
       <Header />
       <main>
         <h1>Posts Page</h1>
         <p>This is the Posts page.</p>
-        {loading ? (
-          <p>Loading posts...</p>
+        {posts.length === 0 ? (
+          <p>No posts found.</p>
         ) : (
           posts.map((post, idx) => (
             <PostCard
@@ -44,4 +30,20 @@ export default function Posts() {
       </main>
     </>
   );
+}
+
+export async function getStaticProps() {
+  const res = await fetch('https://jsonplaceholder.typicode.com/posts?_limit=10');
+  const data = await res.json();
+  const posts = data.map((post: any) => ({
+    title: post.title,
+    content: post.body,
+    userId: post.userId,
+  }));
+
+  return {
+    props: {
+      posts,
+    },
+  };
 }
