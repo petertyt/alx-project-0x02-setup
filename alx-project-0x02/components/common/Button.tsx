@@ -1,5 +1,5 @@
 import React from 'react';
-import { ButtonProps } from '../../interfaces';
+import { type ButtonProps } from '../../interfaces';
 
 const sizeStyles: Record<string, React.CSSProperties> = {
   small: { padding: '0.25rem 0.75rem', fontSize: '0.85rem' },

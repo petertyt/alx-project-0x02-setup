@@ -1,5 +1,6 @@
 import Header from '../components/layout/Header';
-import Button from '../components/common/Button';
+// eslint-disable-next-line import/no-absolute-path
+import Button from '@/components/common/Button';
 
 export default function About() {
   return (
